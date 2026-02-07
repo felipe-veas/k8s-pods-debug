@@ -1,0 +1,22 @@
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+name: release-please
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        with:
+          # This action requires a GitHub Token (PAT) with 'repo' scope
+          # or 'contents:write' and 'pull_requests:write' permissions
+          # if 'workflow permissions' in repository settings are not enough.
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+          release-type: go
