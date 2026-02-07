@@ -300,6 +300,7 @@ This project is licensed under the [MIT License](LICENSE) - see the LICENSE file
 
 ## 🌟 Acknowledgments
 
+- Original project by [jbuet](https://github.com/jbuet)
 - Inspired by kubectl's built-in debug functionality
 - Built with [Cobra](https://github.com/spf13/cobra) CLI framework
 - Security best practices from [Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
