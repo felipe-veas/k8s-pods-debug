@@ -1,0 +1,31 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: no-commit-to-branch
+        args: [--branch, main]
+      - id: check-executables-have-shebangs
+      - id: check-shebang-scripts-are-executable
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+      - id: check-case-conflict
+      - id: check-yaml
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.0
+    hooks:
+      - id: gitleaks
+        args: [--verbose]
+
+  - repo: https://github.com/golangci/golangci-lint
+    rev: v2.8.0
+    hooks:
+      - id: golangci-lint
+        args: [--timeout=5m]
