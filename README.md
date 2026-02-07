@@ -15,6 +15,13 @@ A powerful Kubernetes debugging tool that creates secure debug pods with non-roo
 
 ## 📦 Installation
 
+### Using Homebrew (macOS/Linux)
+
+```bash
+brew tap felipe-veas/tap
+brew install kpdbug
+```
+
 ### Using Go
 
 ```bash
