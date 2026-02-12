@@ -1,5 +1,4 @@
-# This is an example .goreleaser.yml file with some sensible defaults.
-# Make sure to check the documentation at https://goreleaser.com
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
 version: 2
 
 project_name: kpdbug
@@ -25,8 +24,6 @@ builds:
 archives:
   - formats:
       - tar.gz
-    # this name template makes the tarballs look like
-    # kpdbug_1.0.0_Darwin_x86_64.tar.gz
     name_template: >-
       {{ .ProjectName }}_
       {{- title .Os }}_
@@ -48,53 +45,23 @@ changelog:
       - '^docs:'
       - '^test:'
 
-# The lines below are responsible for generating the Homebrew formula
 brews:
-  -
-    # Name template of the recipe
-    # Default to project name
-    name: kpdbug
-
-    # Repository to push the tap to.
+  - name: kpdbug
     repository:
       owner: felipe-veas
       name: homebrew-tap
-      # token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}" # optional, defaults to GITHUB_TOKEN
-
-    # Valid: "github" (default), "gitlab" or "gitea"
-    # url_template: "https://github.com/myuser/myrepo/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
-
-    # Git author used to commit to the repository.
-    # Defaults are shown.
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+      branch: "{{ .ProjectName }}-{{ .Version }}"
+      pull_request:
+        enabled: true
+        base: main
     commit_author:
       name: goreleaserbot
       email: bot@goreleaser.com
-
-    # Folder inside the repository to put the formula.
-    # Default is the root folder.
     directory: Formula
-
-    # Your app's homepage.
-    # Default is empty.
     homepage: "https://github.com/felipe-veas/k8s-pods-debug"
-
-    # Template of your app's description.
-    # Default is empty.
     description: "Kubernetes pod debugging tool"
-
-    # SPDX identifier of your app's license.
-    # Default is empty.
     license: "MIT"
-
-    # Setting this will prevent goreleaser to actually try to commit the updated
-    # formula - instead, the formula file will be stored on the dist folder only,
-    # leaving the responsibility of publishing it to the user.
-    # If set to auto, the release will not be published to the homebrew tap if
-    # there is an error creating or updating the formula.
-    # Default is false.
     skip_upload: auto
-
-    # So you can `brew test` your formula.
-    # Default is empty.
     test: |
       system "#{bin}/kpdbug --version"
